@@ -1,29 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {InitialState,DataPayload} from '../types'
+
 
 export const getPost:any = createAsyncThunk('getPost/patient_id', 
+
 async(patient_id:number)=>{
     // console.log(${patient_id});
     return fetch(`http://127.0.0.1:5000/patient/${patient_id}`)
     .then(res=>res.json())
 })
 
+const initialState:InitialState={
+    patients:[],
+    error:null,
+    loading:false
 
- const patientSlice = createSlice({
-    name:"post",
-    initialState:{
-        loading:false,
-        post:[],
-        error:null
-    },
+}
+
+
+ export const patientSlice = createSlice({
+    name:"patient",
+    initialState,
      reducers:{
-        [getPost.pending]:(state:any,action:any)=>{
+        [getPost.pending]:(state:InitialState,action:DataPayload)=>{
             state.loading= true
         },
-        [getPost.fulfilled]:(state:any,action:any)=>{
+        [getPost.fulfilled]:(state:InitialState,action:DataPayload)=>{
             state.loading = false;
-            state.post = {action:action.payload};
+            state.patients = action.payload;
         },
-        [getPost.rejected]:(state:any,action:any)=>{
+        [getPost.rejected]:(state:InitialState,action:DataPayload)=>{
             state.loading = false;
             state.error= action.payload
         }
@@ -33,5 +39,5 @@ async(patient_id:number)=>{
 
 
 
- export default patientSlice.reducer;
+ export const patientsActions=patientSlice.actions;
 //  export const selectPost = (state:any)=>state.post.post;

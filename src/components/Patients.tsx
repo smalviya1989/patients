@@ -1,8 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
-import { getPost } from '../redux/features/patientSlice';
+import { getPost } from '../redux/patientSlice';
 
 
 
@@ -11,7 +11,7 @@ import { getPost } from '../redux/features/patientSlice';
 const Patients = () => {
   
   const [patient_id, setPatient_id] = useState("");
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useDispatch();
  
 
@@ -37,7 +37,7 @@ const Patients = () => {
           <input type='number' placeholder='Patient Id' value={patient_id} onChange={(e: any) => setPatient_id(e.target.value)} />
         </fieldset>
         <button type='submit' onClick={handlefetchdata}>Get Patient</button>
-        <button type='button' onClick={() => navigate('/addpatient')}>Add Patient</button>
+        <button type='button' >Add Patient</button>
         
 
       </form>
