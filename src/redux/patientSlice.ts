@@ -17,17 +17,35 @@ const initialState:InitialState={
 
 }
 
+// export const addpatient = createAsyncThunk('getPost/createPost', 
+
+// async(data)=>{
+    
+//     return fetch(`http://127.0.0.1:5000/patient`, {
+//         method: 'POST',
+//             mode: 'cors',
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             },
+//             body: JSON.stringify(data=
+//             )
+
+//     })
+//     .then(res=>res.json())
+// })
+
 
  export const patientSlice = createSlice({
     name:"patient",
     initialState,
-     reducers:{
+    reducers:{},
+     extraReducers:{
         [getPost.pending]:(state:InitialState,action:DataPayload)=>{
             state.loading= true
         },
         [getPost.fulfilled]:(state:InitialState,action:DataPayload)=>{
             state.loading = false;
-            state.patients = action.payload;
+            state.patients.push(action.payload)
         },
         [getPost.rejected]:(state:InitialState,action:DataPayload)=>{
             state.loading = false;
