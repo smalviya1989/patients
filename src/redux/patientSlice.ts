@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+
 import {InitialState,DataPayload} from '../types'
 
 
@@ -17,22 +18,27 @@ const initialState:InitialState={
 
 }
 
-// export const addpatient = createAsyncThunk('getPost/createPost', 
+export const addpatient:any = createAsyncThunk('getPost/addpatient', 
 
-// async(data)=>{
+async(Patients)=>{
     
-//     return fetch(`http://127.0.0.1:5000/patient`, {
-//         method: 'POST',
-//             mode: 'cors',
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             },
-//             body: JSON.stringify(data=
-//             )
+    return fetch(`http://127.0.0.1:5000/patient`, {
+        method: 'POST',
+            mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name:Patients,
+                patient_id:Patients,
+                
+            }
 
-//     })
-//     .then(res=>res.json())
-// })
+            )
+
+    })
+    .then(res=>res.json())
+})
 
 
  export const patientSlice = createSlice({
@@ -48,6 +54,17 @@ const initialState:InitialState={
             state.patients.push(action.payload)
         },
         [getPost.rejected]:(state:InitialState,action:DataPayload)=>{
+            state.loading = false;
+            state.error= action.payload
+        },        
+        [addpatient.pending]:(state:InitialState,action:DataPayload)=>{
+            state.loading= true
+        },
+        [addpatient.fulfilled]:(state:InitialState,action:DataPayload)=>{
+            state.loading = false;
+            state.patients.push(action.payload)
+        },
+        [addpatient.rejected]:(state:InitialState,action:DataPayload)=>{
             state.loading = false;
             state.error= action.payload
         }

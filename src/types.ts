@@ -3,7 +3,7 @@ export interface Patients {
     age:           number;
     city:          string;
     contact_no:    string;
-    date_of_birth: Date;
+    date_of_birth: string;
     gender:        string;
     name:          string;
     patient_id:    number;
@@ -15,5 +15,11 @@ export interface InitialState{
     error:any
 }
 export interface DataPayload{
-    payload:Patients[]
+    payload:Patients
 }
+export interface IProps {
+    exact?: boolean;
+    path: string;
+    component: React.ComponentType<any>;
+  }
+  
